@@ -1,4 +1,11 @@
-
+<h1>Resultados de : <small>{{criterioBusqueda}}</small></h1>
+<div class="row" *ngIf="heroesEncontrados.length==0">
+  <div class="col">
+    <div class="alert alert-info" role="alert">
+      No existen datos con el nombre ingresado
+    </div>
+  </div>
+</div>
 <div class="card-columns">
   <div class="card" *ngFor="let heroe of heroesEncontrados; let i = index">
     <img [src]="heroe.img" class="card-img-top" [alt]="heroe.nombre">
