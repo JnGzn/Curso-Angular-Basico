@@ -1,3 +1,4 @@
+import { BuscadorComponent } from './components/buscador/buscador.component';
 import { HeroeComponent } from './components/heroe/heroe.component';
 import { HeroesComponent } from './components/heroes/heroes.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'heroes', component: HeroesComponent },
   { path: 'heroe/:id', component: HeroeComponent },
-  // { path: 'path4', component: Name4Component },
+  { path: 'buscador/:nombre', component: BuscadorComponent },
   { path: '**', component: HomeComponent },
 
 
