@@ -18,6 +18,11 @@ export class HomeComponent implements OnInit {
     //   console.log(data.albums.items);
     //   this.nuevasCanciones = data.albums.items;
     // });
+    //map modifica la dta
+    this.spotify.getNewRelases().subscribe(data => {
+        console.log(data);
+        this.nuevasCanciones = data;
+      });
 
    }
   ngOnInit(): void {
