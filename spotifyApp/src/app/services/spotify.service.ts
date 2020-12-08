@@ -32,7 +32,7 @@ export class SpotifyService {
   }
 
   getArtistaByName(name: string): Observable<any>{
-    return this.getQuery(`search?q=${name}&type=artist`).pipe(
+    return this.getQuery(`search?q=${name}&type=artist&limit=10`).pipe(
       map( data =>  data['artists'].items )
     );
   }
