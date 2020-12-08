@@ -6,6 +6,8 @@ import { registerLocaleData } from '@angular/common';
 import localEs from '@angular/common/locales/es';
 import localfr from '@angular/common/locales/fr';
 import { CapitalizadoPipe } from './pipes/capitalizado.pipe';
+import { DomSeguroPipe } from './pipes/dom-seguro.pipe';
+import { PwdPipe } from './pipes/pwd.pipe';
 
 registerLocaleData(localfr);
 registerLocaleData(localEs);
@@ -13,6 +15,8 @@ registerLocaleData(localEs);
   declarations: [
     AppComponent,
     CapitalizadoPipe,
+    DomSeguroPipe,
+    PwdPipe,
 
   ],
   imports: [

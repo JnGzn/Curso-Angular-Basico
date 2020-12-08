@@ -179,6 +179,16 @@
           <td>{{ nombre2 |capitalizado:false }}</td>
         </tr>
 
+        <tr>
+          <td> {{nombre2}} </td>
+          <td>Constraseña:{{activar}}
+            <br>
+            <button (click)="activar = !activar" class="btn btn-primary">
+              Activar/Desactivae
+            </button>
+          </td>
+          <td>{{ nombre2 | pwd:activar }}</td>
+        </tr>
       </tbody>
     </table>
 
@@ -186,5 +196,17 @@
     <ul>
       <li *ngFor="let item of array | slice:5:20">{{item}}</li>
     </ul>
+  </div>
+</div>
+
+<h3 class="mt-4">Dom Seguro</h3>
+<hr>
+<div class="row mb-5">
+  <div class="col">
+    <iframe width="560" height="315"
+      [src]="videoUrl | domSeguro" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+       allowfullscreen>
+    </iframe>
   </div>
 </div>
