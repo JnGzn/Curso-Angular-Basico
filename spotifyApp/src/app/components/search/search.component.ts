@@ -1,3 +1,4 @@
+import { SpotifyService } from './../../services/spotify.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  artistas: any[] = [];
+  constructor(private spotify: SpotifyService) { }
 
   ngOnInit(): void {
+  }
+
+  burcarArtista(value: string): void{
+    if (!value){
+      this.artistas = [];
+      return;
+    }
+    this.spotify.getArtistaByName(value).subscribe(data => {
+      console.log(data.artists.items);
+      this.artistas = data.artists.items
+    })
   }
 
 }
