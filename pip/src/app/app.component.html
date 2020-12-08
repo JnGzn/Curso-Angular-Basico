@@ -148,8 +148,35 @@
 
         <tr>
           <td> {{date}} </td>
-          <td> date:'short' </td>
+          <td>date:'MMMM - dd' </td>
           <td>{{ date | date:'MMMM - dd' }}</td>
+        </tr>
+
+        <tr>
+          <td> {{date}} </td>
+          <td> date:'MMMM - dd':'':'{{idioma}}'
+                <br>
+                <button (click)="idioma = 'es'" class="btn btn-primary">Español</button>
+                <button (click)="idioma = 'en'" class="btn btn-secondary">Ingles</button>
+                <button (click)="idioma = 'fr'" class="btn btn-success">Frances</button>
+          </td>
+          <td>{{ date | date:'MMMM - dd':'':idioma }}</td>
+        </tr>
+
+        <tr>
+          <td colspan="3"> Personalizado </td>
+        </tr>
+
+        <tr>
+          <td> {{nombre2}} </td>
+          <td>capitalizado</td>
+          <td>{{ nombre2 |capitalizado }}</td>
+        </tr>
+
+        <tr>
+          <td> {{nombre2}} </td>
+          <td>capitalizado:false</td>
+          <td>{{ nombre2 |capitalizado:false }}</td>
         </tr>
 
       </tbody>

@@ -7,11 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   nombre = 'Herculito';
+  nombre2 = 'jUAn gaBriEL';
   array = [1, 2, 3, 4, 6, 7, 8, 9, 10];
   PI: number = Math.PI;
   porcentaje = 0.234;
   salario = 12345.5;
   date = new Date();
+  idioma = 'es';
 
   valorPromesa = new Promise<string>((resolve, reject) => {
     setTimeout(() => {
