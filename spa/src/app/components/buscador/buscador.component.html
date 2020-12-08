@@ -7,14 +7,6 @@
   </div>
 </div>
 <div class="card-columns">
-  <div class="card" *ngFor="let heroe of heroesEncontrados; let i = index">
-    <img [src]="heroe.img" class="card-img-top" [alt]="heroe.nombre">
-    <div class="card-body">
-      <h5 class="card-title">{{ heroe.nombre }}</h5>
-      <p class="card-text">{{ heroe.bio }}</p>
-      <p class="card-text"><small class="text-muted">{{ heroe.aparicion }}</small></p>
-    </div>
-    <!-- <button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block">Ver heroe</button> -->
-    <a [routerLink]="['/heroe', i]" href="" class="btn btn-outline-primary btn-block">Ver mas link</a>
-  </div>
+  <app-heroe-tarjeta (heroeSeleccionado)="verHeroe( $event )" [heroe]="heroe" [index]="heroe.idx"  *ngFor="let heroe of heroesEncontrados; let i = index"></app-heroe-tarjeta>
+
 </div>

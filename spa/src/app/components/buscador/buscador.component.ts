@@ -1,5 +1,5 @@
 import { HeroesService } from './../../services/heroes.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Heroe } from 'src/app/interfaces/heroe';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
@@ -12,7 +12,9 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class BuscadorComponent implements OnInit {
   heroesEncontrados: Heroe[];
   criterioBusqueda: string;
-  constructor(private activatedRoute: ActivatedRoute, private heroesService: HeroesService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private heroesService: HeroesService,
+              private router: Router) {
     this.activatedRoute.params.subscribe(params =>{
         this.criterioBusqueda = params['nombre'];
         this.heroesEncontrados = heroesService.buscarHeroes(params['nombre']);
@@ -24,6 +26,10 @@ export class BuscadorComponent implements OnInit {
 
   ): void {
 
+  }
+
+  verHeroe(index: number): void{
+    this.router.navigate(['/heroe', index]);
   }
 
 }

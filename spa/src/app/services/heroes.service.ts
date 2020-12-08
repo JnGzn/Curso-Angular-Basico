@@ -75,9 +75,11 @@ export class HeroesService {
 
     const heroesEncontrados = [];
 
-    for (const heroe of this.hereos) {
+    for (let i = 0; i< this.hereos.length; i++) {
+      let heroe: Heroe = this.hereos[i];
       const nombreHeroe: string = heroe.nombre.toLowerCase();
       if (nombreHeroe.indexOf(nombre) >= 0) {
+        heroe.idx = i;
         heroesEncontrados.push(heroe);
       }
     }
