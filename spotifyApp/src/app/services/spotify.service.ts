@@ -8,25 +8,32 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyService {
 
-  token = 'BQDOtoyn0HFXB9EGAJH1oXQpVzZK4XNhDQJGuS0A2-lqHtBwCCCyOsDUlr6r0iN-qEv4ei2h5275tMWtp3Y';
+  token = 'BQAIkLlkmgNVJ76A6ksmSAos8vlKldxGNAppvVMVdCvnZn_HOP8wBMHfalXdyMF7bc25XVER8SAHYMmOdww';
   header = new HttpHeaders({
     Authorization: `Bearer ${this.token}`
   });
+
+  getQuery(query): Observable<any>{
+    const url = `https://api.spotify.com/v1/${query}`;
+
+
+    return this.http.get(url, {headers: this.header});
+  }
+
   constructor(private http: HttpClient) {
 
   }
 
   getNewRelases(): Observable<any>{
 
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases', {headers: this.header}).pipe(
+    return this.getQuery('browse/new-releases').pipe(
       map(data =>  data['albums'].items )
-    )
+    );
   }
 
   getArtistaByName(name: string): Observable<any>{
-    return this.http.get(`https://api.spotify.com/v1/search?q=${name}&type=artist`, {headers: this.header})
-    .pipe(
+    return this.getQuery(`search?q=${name}&type=artist`).pipe(
       map( data =>  data['artists'].items )
-    )
+    );
   }
 }
