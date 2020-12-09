@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
+.table-dark, .table-dark>td, .table-dark>th {
+  background-color: black;
+}
+
+.table-dark {
+  color: #fff;
+  background: black;
+}
+
 body {
   background-color: black;
   color: white !important;

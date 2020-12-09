@@ -1,13 +1,21 @@
 <div class="row">
   <div class="col">
-    <input type="text"  (keyup)="burcarArtista(busqueda.value)" class="form-control" placeholder="busca artista..." #busqueda>
+    <input type="text"  (keyup)="burcarArtista(busqueda.value)" class="form-control" placeholder="Buscar Artista..." #busqueda>
   </div>
 </div>
-<div class="card-columns m-5">
+
+<div class="alert alert-danger" *ngIf="error">
+  <h3>Error</h3>
+  <p>{{error}}</p>
+</div>
+
+<app-loading *ngIf="!loading && !error"></app-loading>
+<app-tarjetas *ngIf="!loading" class="m-5" [items]="artistas"></app-tarjetas>
+<!-- <div class="card-columns m-5">
   <div class="card" *ngFor="let artista of artistas">
     <img [src]="artista.images | noImage" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{artista.name}}</h5>
     </div>
   </div>
-</div>
+</div> -->

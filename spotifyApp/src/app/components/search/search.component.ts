@@ -8,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class SearchComponent implements OnInit {
-
+  error: string;
   artistas: any[] = [];
-  constructor(private spotify: SpotifyService) { }
+  loading = false;
+  constructor(private spotify: SpotifyService) {
+
+   }
 
   ngOnInit(): void {
   }
@@ -20,9 +23,15 @@ export class SearchComponent implements OnInit {
       this.artistas = [];
       return;
     }
-    this.spotify.getArtistaByName(value).subscribe(data => {
+    this.loading = true;
+    this.spotify.getArtistasByName(value).subscribe(data => {
       this.artistas = data;
-    })
+      this.loading = false;
+    }, err => {
+      console.log(err);
+      this.error = err.error.error.message;
+      this.loading = false;
+    });
   }
 
 }

@@ -8,15 +8,13 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyService {
 
-  token = 'BQAIkLlkmgNVJ76A6ksmSAos8vlKldxGNAppvVMVdCvnZn_HOP8wBMHfalXdyMF7bc25XVER8SAHYMmOdww';
+  token = 'BQBlffH5fk0iIiYHOx0YOfhNBDi1Ak0Jq_4ma72Ihpi9o-ZPxAOT5xCzSGzE6tEoQy3boXO3FkkbccfR7d4';
   header = new HttpHeaders({
     Authorization: `Bearer ${this.token}`
   });
 
   getQuery(query): Observable<any>{
     const url = `https://api.spotify.com/v1/${query}`;
-
-
     return this.http.get(url, {headers: this.header});
   }
 
@@ -31,9 +29,19 @@ export class SpotifyService {
     );
   }
 
-  getArtistaByName(name: string): Observable<any>{
+  getArtistasByName(name: string): Observable<any>{
     return this.getQuery(`search?q=${name}&type=artist&limit=10`).pipe(
       map( data =>  data['artists'].items )
     );
+  }
+
+  getArtistaById(id): Observable<any>{
+    return this.getQuery(`artists/${id}`);
+  }
+
+  getTopTracks(id: string): Observable<any>{
+    return this.getQuery(`artists/${id}/top-tracks?market=es`).pipe(
+      map( data => data['tracks'])
+    )
   }
 }
