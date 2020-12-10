@@ -1,0 +1,15 @@
+<ion-header [translucent]="true" class="ion-no-border" >
+  <ion-toolbar color="dark">
+    <ion-title>
+      Pendientes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="dark">
+  <ion-list color="dark">
+    <ion-item  detail *ngFor="let item of desdeosScervice.listas" color="dark">
+      <ion-label>{{ item.title }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

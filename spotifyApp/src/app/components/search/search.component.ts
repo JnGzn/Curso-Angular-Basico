@@ -18,14 +18,30 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  borrarResultados():void{
+
+  }
+
   burcarArtista(value: string): void{
+    console.log(value);
+
     if (!value){
       this.artistas = [];
       return;
     }
     this.loading = true;
+    this.artistas = [];
     this.spotify.getArtistasByName(value).subscribe(data => {
-      this.artistas = data;
+      console.log(data);
+
+      for (const iterator of data['artists'].items) {
+        this.artistas.push(iterator)
+      }
+      for (const iterator of data['tracks'].items) {
+        this.artistas.push(iterator)
+      }
+
+      // this.artistas = data;
       this.loading = false;
     }, err => {
       console.log(err);

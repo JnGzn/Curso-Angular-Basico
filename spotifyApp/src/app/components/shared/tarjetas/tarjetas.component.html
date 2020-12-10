@@ -1,9 +1,13 @@
 <div class="card-columns">
   <div (click)="verArtista(item)" class="card puntero" *ngFor="let item of items">
-    <img [src]="item.images | noImage" class="card-img-top" alt="...">
+    <img [src]="item.images | noImage" class="card-img-top" alt="..." *ngIf="!item.album">
+    <img [src]="item.album.images | noImage" class="card-img-top" alt="..." *ngIf="item.album">
     <div class="card-body">
       <h5 class="card-title">{{item.name}}</h5>
       <p class="card-text" *ngIf="item.artists"><span class="badge badge-primary"  *ngFor="let artista of item.artists">{{artista.name}}</span></p>
+      <!-- <audio [src]="item.preview_url" controls *ngIf="item.album"></audio> -->
     </div>
+    <iframe *ngIf="item.uri && item.type != 'artist'" [src]="'https://open.spotify.com/embed?uri='+item.uri | domSeguro"
+          width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
   </div>
 </div>

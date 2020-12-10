@@ -1,6 +1,10 @@
 <div class="row">
   <div class="col">
-    <input type="text"  (keyup)="burcarArtista(busqueda.value)" class="form-control" placeholder="Buscar Artista..." #busqueda>
+    <input type="text"  class="form-control" (keyup.enter)="burcarArtista(busqueda.value)" placeholder="Buscar Artista ó Cancion..." #busqueda>
+  </div>
+  <div class="col-2">
+
+    <button class="btn btn-outline-primary" (click)="burcarArtista(busqueda.value)" >Buscar</button>
   </div>
 </div>
 
@@ -9,8 +13,8 @@
   <p>{{error}}</p>
 </div>
 
-<app-loading *ngIf="!loading && !error"></app-loading>
-<app-tarjetas *ngIf="!loading" class="m-5" [items]="artistas"></app-tarjetas>
+<app-loading *ngIf="loading"></app-loading>
+<app-tarjetas *ngIf="!loading && !error" class="m-5" [items]="artistas"></app-tarjetas>
 <!-- <div class="card-columns m-5">
   <div class="card" *ngFor="let artista of artistas">
     <img [src]="artista.images | noImage" class="card-img-top" alt="...">
