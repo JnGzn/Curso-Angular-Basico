@@ -1,5 +1,7 @@
 import { DesdeosService } from './../../services/desdeos.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -8,8 +10,47 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor(public desdeosScervice:DesdeosService) {
+  constructor(public desdeosScervice:DesdeosService,
+              private router: Router,
+              private alertController: AlertController) {
     
+  }
+
+  async agregarLista(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Nueva Lista',
+      inputs: [
+        {
+          name: 'title',
+          type: 'text',
+          placeholder: 'Nombre de la Lista'
+        }
+      ],
+      // subHeader: 'Subtitle',
+      // message: 'This is an alert message.',
+      buttons: [
+        {
+          text: 'Cancelar', 
+          role: 'cancel'
+        }, {
+          text: 'Crear',
+          handler: (data) =>{
+            console.log(data);
+            if(!data.title){
+              return;
+            }
+
+            const listaId = this.desdeosScervice.crearLista(data.title);
+            this.router.navigateByUrl(`/tabs/tab1/agregar/${listaId}`);
+            //crear la lista
+          }
+        }
+    ]
+    });
+
+     alert.present();
+    // this.router.navigateByUrl('/tabs/tab1/agregar');
   }
 
 }

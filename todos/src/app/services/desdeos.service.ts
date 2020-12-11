@@ -8,11 +8,33 @@ export class DesdeosService {
 
   listas: Lista[] = [];
   constructor() { 
-    const lista1 = new Lista('Recolectar desarrollos');    
-    const lista2 = new Lista('Recolectar desarrollos 2');
-    
-    this.listas.push(lista1, lista2)
+  
     console.log(this.listas);
-    
+    this.cargarStorage();
+  }
+
+  crearLista(titulo: string): number{
+    const nevaLista = new Lista(titulo);   
+    this.listas.push(nevaLista);
+    this.guardarStorage();
+    return nevaLista.id;
+  }
+
+  cargarLista(id: number | string): Lista{
+    id = Number(id);
+    return this.listas.find( listaData => listaData.id === id)
+
+
+  }
+
+  guardarStorage(){
+    localStorage.setItem('data', JSON.stringify(this.listas));
+  }
+
+  cargarStorage(){
+    var data = localStorage.getItem('data')
+    if(data){
+      this.listas = JSON.parse(data);
+    }
   }
 }

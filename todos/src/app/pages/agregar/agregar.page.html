@@ -1,0 +1,37 @@
+<ion-header [translucent]="true" class="ion-no-border" >
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaltHref="/">
+
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      
+      {{lista.title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="dark">
+  <ion-list color="dark">
+    <ion-item color="dark">
+      <ion-label position="floating" >Nuevo Item</ion-label>
+      <ion-input type="text" [(ngModel)]="nombreItem" (keyup.enter)="agregarItem()"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header  color="dark" >
+      <ion-label>
+        Tareas por hacer
+      </ion-label>
+    </ion-list-header>
+  </ion-list>
+
+  <ion-list *ngFor="let item of lista.items">
+    <ion-item color="dark">
+      <ion-label>{{ item.descripcion }}</ion-label>
+      <ion-checkbox slot="start" color="tertiary" [(ngModel)]="item.completado"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>
