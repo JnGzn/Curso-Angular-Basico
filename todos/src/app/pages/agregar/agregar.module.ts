@@ -1,3 +1,5 @@
+import { ComponentsModule } from './../../components/components.module';
+import { ListasComponent } from './../../components/listas/listas.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +15,8 @@ import { AgregarPage } from './agregar.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AgregarPageRoutingModule
+    AgregarPageRoutingModule, 
+    
   ],
   declarations: [AgregarPage]
 })

@@ -23,9 +23,13 @@ export class DesdeosService {
   cargarLista(id: number | string): Lista{
     id = Number(id);
     return this.listas.find( listaData => listaData.id === id)
-
-
   }
+
+  borrarLista(lista: Lista){
+    this.listas = this.listas.filter(datalista => datalista.id != lista.id);
+    this.guardarStorage();
+  }
+
 
   guardarStorage(){
     localStorage.setItem('data', JSON.stringify(this.listas));
@@ -37,4 +41,6 @@ export class DesdeosService {
       this.listas = JSON.parse(data);
     }
   }
+
+
 }

@@ -2,6 +2,7 @@ import { DesdeosService } from './../../services/desdeos.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Lista } from 'src/app/models/lista.model';
 
 @Component({
   selector: 'app-tab1',
@@ -51,6 +52,10 @@ export class Tab1Page {
 
      alert.present();
     // this.router.navigateByUrl('/tabs/tab1/agregar');
+  }
+
+  listaSeleccionada(lista: Lista){
+    this.router.navigateByUrl(`/tabs/tab1/agregar/${lista.id}`);
   }
 
 }
