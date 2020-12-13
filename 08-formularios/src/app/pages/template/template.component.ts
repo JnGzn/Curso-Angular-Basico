@@ -30,7 +30,6 @@ export class TemplateComponent implements OnInit {
     if(form.invalid){
       Object.values(form.controls).forEach(control => {
         control.markAsTouched();
-
       })
       return;
     }
