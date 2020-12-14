@@ -1,6 +1,7 @@
+import { ValidadoresService } from './../../services/validadores.service';
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -11,7 +12,8 @@ export class ReactiveComponent implements OnInit {
 
   form: FormGroup
 
-  constructor( private fb: FormBuilder ) {
+  constructor( private fb: FormBuilder,
+              private validadores: ValidadoresService ) {
     this.crearFormulario();
     this.cargarDataFormualario();
    }
@@ -42,30 +44,46 @@ export class ReactiveComponent implements OnInit {
   crearFormulario(){
     this.form = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(5)]],
-      apellido: ['', Validators.required],
+      apellido: ['', [Validators.required, this.validadores.noGarzon]],
       correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9-.]+\.[a-z]{2,3}$')]],
       direccion: this.fb.group({
         distrito: ['', Validators.required],
         ciudad: ['', Validators.required],
-      })
+      }),
+      pasatiempos: this.fb.array([
+
+      ])
     })
   }
 
+  agregarElemento(){
+    this.pasatiempos.push(this.fb.control(''))
+  }
+
+  eliminarPasatiempo(idx: number){
+    this.pasatiempos.removeAt(idx);
+  }
+
   cargarDataFormualario(){
-    this.form.setValue({
-      nombre: "Juan G",
-      apellido: "Garzon",
-      correo: "jngzn@hotmail.com",
-      direccion: {
-        distrito: "Cundinamarca",
-        ciudad: "Bogota"
-      }
-    })
+    // this.form.setValue({
+    //   nombre: "Juan G",
+    //   apellido: "Garzon",
+    //   correo: "jngzn@hotmail.com",
+    //   direccion: {
+    //     distrito: "Cundinamarca",
+    //     ciudad: "Bogota"
+    //   }
+    // })
 
     this.form.reset({
       nombre: "Juan G",
       apellido: "Garzon",
-      correo: "jngzn@hotmail.com"
+      correo: "jngzn@hotmail.com",
+        direccion: {
+          distrito: "Cundinamarca",
+          ciudad: "Bogota"
+        }
+
     })
   }
 
@@ -89,6 +107,10 @@ export class ReactiveComponent implements OnInit {
 
   get ciudadNoValido(): boolean{
     return this.form.get('direccion.ciudad').invalid && this.form.get('direccion.ciudad').touched;
+  }
+
+  get pasatiempos(): FormArray{
+    return this.form.get('pasatiempos') as FormArray;
   }
 
   //#endregion
