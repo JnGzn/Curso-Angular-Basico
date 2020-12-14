@@ -46,6 +46,8 @@ export class ReactiveComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(5)]],
       apellido: ['', [Validators.required, this.validadores.noGarzon]],
       correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9-.]+\.[a-z]{2,3}$')]],
+      pass1: ['abc', Validators.required],
+      pass2: ['abcd', Validators.required],
       direccion: this.fb.group({
         distrito: ['', Validators.required],
         ciudad: ['', Validators.required],
@@ -53,6 +55,8 @@ export class ReactiveComponent implements OnInit {
       pasatiempos: this.fb.array([
 
       ])
+    }, {
+      validators: this.validadores.passwordsIguales('pass1', 'pass2')
     })
   }
 
@@ -77,7 +81,7 @@ export class ReactiveComponent implements OnInit {
 
     this.form.reset({
       nombre: "Juan G",
-      apellido: "Garzon",
+      apellido: "Garzon T",
       correo: "jngzn@hotmail.com",
         direccion: {
           distrito: "Cundinamarca",
@@ -111,6 +115,17 @@ export class ReactiveComponent implements OnInit {
 
   get pasatiempos(): FormArray{
     return this.form.get('pasatiempos') as FormArray;
+  }
+
+  get pass1NoValido(): boolean{
+    return this.form.get('pass1').invalid && this.form.get('pass1').touched;
+  }
+
+  get pass2NoValido(): boolean{
+    const pass1 = this.form.get('pass1').value;
+    const pass2 = this.form.get('pass2').value;
+
+    return !(pass1 === pass2);
   }
 
   //#endregion
