@@ -36,6 +36,9 @@ export class ValidadoresService {
   }
 
   existeUsuario(control: FormControl):Promise<ErrorValidate> | Observable<ErrorValidate> {
+    if(!control.value){
+      return new Promise((resolve) => resolve(null))
+    }
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if(control.value === 'me'){
