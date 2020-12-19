@@ -1,3 +1,5 @@
+import { RatingModule } from 'ng-starrating';
+import { PipesModule } from './../pipes/pipes.module';
 import { ComponentsModule } from './../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     HttpClientModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule,
+    RatingModule,
+
   ]
 })
 export class PagesModule { }

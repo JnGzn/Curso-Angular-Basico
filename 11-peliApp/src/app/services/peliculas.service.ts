@@ -1,8 +1,10 @@
+import { Cast, CreditsResponse } from './../interfaces/credits-response';
+import { MovieDetails } from './../interfaces/movie-respose';
 import { CarteleraResponse, Movie } from './../interfaces/cartelera';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +54,24 @@ export class PeliculasService {
   }
 
   resetCartelePage(): void{
-    this.carteleraPage = 1;
+    this.
+    carteleraPage = 1;
+  }
+
+  obtenerDetallePelicula(id: string): Observable<MovieDetails> {
+    return this.http.get<MovieDetails>(`${this.url}/movie/${id}?`, {
+      params: this.params
+    }).pipe(
+      catchError(err => of(null))
+    );
+  }
+
+  obtenerCreditos(id: string): Observable<Cast[]>{
+    return this.http.get<CreditsResponse>(`${this.url}/movie/${id}/credits?`, {
+      params: this.params
+    }).pipe(
+      map( resp => resp.cast),
+      catchError(err => of(null))
+    );
   }
 }
