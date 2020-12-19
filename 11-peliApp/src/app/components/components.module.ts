@@ -5,16 +5,20 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SlideshowComponent } from './slideshow/slideshow.component';
 // import { SwiperModule } from 'src/angular/src/public-api';
 import SwiperCore from "swiper/core";
+import { RatingModule } from 'ng-starrating';
+import { PeliculasPosterGridComponent } from './peliculas-poster-grid/peliculas-poster-grid.component';
 
 @NgModule({
-  declarations: [NavbarComponent, SlideshowComponent],
+  declarations: [NavbarComponent, SlideshowComponent, PeliculasPosterGridComponent],
   imports: [
     CommonModule,
     RouterModule,
+    RatingModule
     // SwiperModule
   ], exports: [
     NavbarComponent,
-    SlideshowComponent
+    SlideshowComponent,
+    PeliculasPosterGridComponent
   ]
 })
 
