@@ -40,4 +40,18 @@ export class PeliculasService {
       })
     );
   }
+
+  buscarPelicula(query: string): Observable<Movie[]>{
+    const params = {...this.params, page: '1', query};
+
+    return this.http.get<CarteleraResponse>(`${this.url}/search/movie?`, {
+      params
+    }).pipe(
+      map(res => res.results)
+    );
+  }
+
+  resetCartelePage(): void{
+    this.carteleraPage = 1;
+  }
 }
