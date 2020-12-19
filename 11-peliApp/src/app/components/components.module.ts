@@ -1,3 +1,4 @@
+import { PipesModule } from './../pipes/pipes.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +14,8 @@ import { PeliculasPosterGridComponent } from './peliculas-poster-grid/peliculas-
   imports: [
     CommonModule,
     RouterModule,
-    RatingModule
+    RatingModule,
+    PipesModule
     // SwiperModule
   ], exports: [
     NavbarComponent,

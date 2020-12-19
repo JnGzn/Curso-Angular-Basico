@@ -1,16 +1,43 @@
-import { CarteleraResponse } from './../interfaces/cartelera';
+import { CarteleraResponse, Movie } from './../interfaces/cartelera';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeliculasService {
 
+  private url = 'https://api.themoviedb.org/3';
+  private carteleraPage = 1;
+  public cargando = false;
+
   constructor(private http: HttpClient) { }
 
-  obtenercartelera(): Observable<CarteleraResponse>{
-    return this.http.get<CarteleraResponse>('https://api.themoviedb.org/3/movie/now_playing?api_key=63b3121cb97accc815ed52e5591b8962&language=es-ES&page=1')
+  get params(){
+    return {
+      api_key: '63b3121cb97accc815ed52e5591b8962',
+      language: 'es-ES',
+      page: this.carteleraPage.toString()
+
+    };
+  }
+  obtenercartelera(): Observable<Movie[]>{
+    if(this.cargando){
+      return of([]);
+    }
+    this.cargando = true;
+    console.log('llamando');
+
+    return this.http.get<CarteleraResponse>(`${this.url}/movie/now_playing?`, {
+       params: this.params
+      }).pipe(
+      map((resp) => resp.results),
+      tap( () => {
+        this.cargando = false;
+        this.carteleraPage++;
+      })
+    );
   }
 }
