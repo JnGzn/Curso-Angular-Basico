@@ -1,24 +1,28 @@
+import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
+import { MapaComponent } from './components/mapa/mapa.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapaComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    MatSliderModule,
-    MatToolbarModule,
-    MatButtonModule
+    MaterialModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAgNp4DM9coyJlbMUIH_pFkIGpQJ3cG5k0'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "appcarga-981f8": {
+      "hosting": {
+        "appCarga": [
+          "appcarga-981f8"
+        ]
+      }
+    }
+  }
+}
